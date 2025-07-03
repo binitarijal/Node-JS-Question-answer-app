@@ -1,0 +1,249 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Question Cards</title>
+  <link rel="stylesheet" href="register.css">
+  <style>
+body {
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #fefefe, #fbe9e3);
+  min-height: 100vh;
+  color: #4d2c2c;
+  line-height: 1.6;
+}
+
+/* --- Navbar Styles --- */
+nav {
+  background-color: #ffc4af;
+  padding: 18px 30px;
+  box-shadow: 0 5px 15px rgba(255, 135, 95, 0.25);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid rgba(255, 135, 95, 0.1);
+}
+
+nav h1 {
+  margin: 0;
+  font-size: 26px;
+  color: #4d2c2c;
+  letter-spacing: 0.5px;
+  text-align: center;
+}
+
+/* --- General Card Styles (used for both questions and answers) --- */
+.card {
+  background: linear-gradient(145deg, #fef0e8, #fff8f5);
+  color: #4d2c2c;
+  border-radius: 25px;
+  box-shadow: 0 10px 25px rgba(255, 135, 95, 0.2);
+  padding: 30px 26px;
+  transition: transform 0.35s ease-out, box-shadow 0.35s ease-out, background 0.35s ease-out;
+  border: 1px solid rgba(255, 200, 180, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  background: linear-gradient(135deg, #ffede0, #fff7f2);
+  box-shadow: 0 18px 38px rgba(255, 135, 95, 0.45);
+}
+
+.question {
+  font-size: 19.5px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #381a1a;
+  line-height: 1.4;
+}
+
+.author {
+  font-size: 15px;
+  color: #723b2f;
+  text-align: right;
+  font-style: italic;
+  margin-top: auto;
+  padding-top: 10px;
+}
+
+/* --- Specific Styles for the List of Question Cards --- */
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* THIS IS KEY for centering cards horizontally */
+  gap: 30px;
+  padding: 80px 20px;
+  max-width: 1200px;
+  margin: 0 auto; /* Center the container itself */
+}
+
+.card-container .card {
+  width: 300px;
+  cursor: pointer; /* These cards are clickable */
+}
+
+/* --- Styles for a Single Question Detail Page (if applicable) --- */
+.main-content-area {
+  max-width: 900px;
+  margin: 40px auto; /* Center the main content area */
+  padding: 0 20px;
+  /* Added text-align to ensure no leftover left-alignment if no flex */
+  text-align: center; /* Fallback for block elements if flex fails */
+}
+
+.question-detail-card {
+  width: 100%;
+  margin-bottom: 40px;
+  cursor: default;
+  transform: none !important;
+  box-shadow: 0 12px 30px rgba(255, 135, 95, 0.15);
+  text-align: left; /* Ensure content inside card is left-aligned */
+}
+
+.question-detail-card:hover {
+    box-shadow: 0 12px 30px rgba(255, 135, 95, 0.15);
+    background: linear-gradient(145deg, #fef0e8, #fff8f5);
+}
+
+.question-body {
+  font-size: 16.5px;
+  color: #5d3c3c;
+  margin-top: 20px;
+  line-height: 1.7;
+}
+
+.answers-heading {
+  font-size: 28px;
+  color: #381a1a;
+  text-align: center;
+  margin-bottom: 30px;
+  border-bottom: 2px solid #ffede0;
+  padding-bottom: 10px;
+}
+
+/* --- Styles for Answer Cards and their Container --- */
+.answers-container {
+  display: flex;
+  flex-direction: column; /* Stack answers vertically */
+  align-items: center; /* <<< --- THIS IS THE CRITICAL LINE FOR CENTERING ITS FLEX ITEMS (the answer cards) --- >>> */
+  gap: 25px;
+  padding-bottom: 60px;
+  width: 100%; /* Ensure container takes full width available */
+}
+
+.answer-card {
+  width: 95%; /* Make answer cards almost full width of their container */
+  max-width: 700px; /* A good maximum width for answer cards */
+  margin: 0 auto; /* <<< --- THIS IS A POWERFUL FALLBACK/SUPPORT FOR CENTERING THE CARD ITSELF --- >>> */
+  cursor: default;
+  transform: none !important;
+  box-shadow: 0 8px 20px rgba(255, 135, 95, 0.15);
+  text-align: left; /* Ensure content inside the answer card is left-aligned */
+}
+
+.answer-card:hover {
+    box-shadow: 0 8px 20px rgba(255, 135, 95, 0.15);
+    background: linear-gradient(145deg, #fef0e8, #fff8f5);
+}
+
+.answer-text {
+  font-size: 16px;
+  color: #4d2c2c;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+/* --- Media Queries for Responsiveness --- */
+@media (max-width: 960px) {
+  .main-content-area {
+    margin: 30px auto;
+  }
+}
+
+@media (max-width: 768px) {
+  nav {
+    padding: 15px 20px;
+  }
+  nav h1 {
+    font-size: 22px;
+  }
+  .card-container {
+    padding: 40px 15px;
+    gap: 20px;
+  }
+  .card-container .card {
+    width: 90%;
+    padding: 25px 20px;
+  }
+  .question {
+    font-size: 18px;
+  }
+  .author {
+    font-size: 14px;
+  }
+  .main-content-area {
+    padding: 0 15px;
+  }
+  .answer-card {
+    width: 98%;
+    padding: 20px;
+  }
+  .question-detail-card {
+    padding: 25px;
+  }
+  .answers-heading {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  nav h1 {
+    font-size: 20px;
+  }
+  .card-container {
+    padding: 30px 10px;
+  }
+  .card-container .card {
+    width: 95%;
+  }
+  .question {
+    font-size: 17px;
+  }
+  .answer-card {
+    padding: 18px;
+  }
+  .answer-text {
+    font-size: 15px;
+  }
+  .answers-heading {
+    font-size: 22px;
+  }
+}
+}
+  </style>
+</head>
+<body>
+
+  <!-- Navbar include -->
+  <%- include("./components/navbar.ejs") %>
+
+  <!-- Card container -->
+  <div class="card-container">
+    <% data.forEach((item) => { %>
+      <div class="card" onclick="window.location.href='/questions/<%= item.id %>'">
+        <div class="question"><%- item.title %></div>
+        <div class="author">— <%- item.user.username %></div>
+      </div>
+    <% }) %>
+  </div>
+
+</body>
+</html>

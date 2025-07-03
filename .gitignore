@@ -1,0 +1,17 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+.pnpm-store/
+.DS_Store # macOS specific
+.env # Environment variables (highly recommended)
+*.env # Catch all .env files
+.vscode/ # VS Code settings (optional, but often good to ignore)
+build/
+dist/
+coverage/
+*.log
+*.sqlite
+.bytenode_cache/

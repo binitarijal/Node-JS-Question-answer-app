@@ -1,0 +1,16 @@
+<!-- Navbar -->
+  <nav class="navbar">
+    <h1>BR</h1>
+    <ul>
+      <li><a href="/home">Home</a></li>
+   <%   if(isAuthenticated){  %>
+          <li><a href="/askQuestion">+Ask question</a></li>
+        <li><a href="/logout">logout</a></li>
+
+    <%  }else{  %>
+ <li><a href="/register">Register</a></li>
+      <li><a href="/login">Login</a></li>
+
+   <%   }  %>     
+    </ul>
+  </nav>
