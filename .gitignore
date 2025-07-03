@@ -8,10 +8,3 @@ yarn-error.log*
 .DS_Store # macOS specific
 .env # Environment variables (highly recommended)
 *.env # Catch all .env files
-.vscode/ # VS Code settings (optional, but often good to ignore)
-build/
-dist/
-coverage/
-*.log
-*.sqlite
-.bytenode_cache/
