@@ -7,9 +7,9 @@
 </head>
 <body>
     <%- include("../components/navbar.ejs") %>
-    <form action="/verifyOtp" method="post">
+    <form action="/verifyOtp/<%=email %>" method="post">
 
-<input type="number" name="Otp" placeholder="Enter OTP" required>
+<input type="number" name="otp" placeholder="Enter OTP" required>
 <input type="submit" value="Verify OTP" >
 
     </form>

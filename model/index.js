@@ -42,7 +42,7 @@ db.users.hasMany(db.answers)
 db.answers.belongsTo(db.users)
 
 //migrating code
-db.sequelize.sync({force:true }).then(()=>{
+db.sequelize.sync({force:false }).then(()=>{
     console.log("yes resync done");
 });
 
