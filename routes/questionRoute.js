@@ -5,7 +5,8 @@ const upload = multer({ storage: storage }); // Configure multer with the specif
 
 const { renderAskQuestionPage, askQuestion, renderSingleQuestionPage } = require("../controllers/questionController");
 const { isAuthenticated } = require("../middleware/isAuthenticated");
+const catchError = require("../utils/catchError");
 
-router.route('/askQuestion').post( isAuthenticated,  upload.single('image'),askQuestion).get(renderAskQuestionPage);
-router.route('/questions/:id').get( renderSingleQuestionPage); // Route to render a single question page
+router.route('/askQuestion').post( isAuthenticated,  upload.single('image'),catchError(askQuestion)).get(catchError(renderAskQuestionPage));
+router.route('/questions/:id').get( catchError(renderSingleQuestionPage)); // Route to render a single question page
 module.exports=router;

@@ -9,10 +9,20 @@ const jwt = require('jsonwebtoken'); // Import the jsonwebtoken library for toke
 const { promisify } = require('util'); // Import the promisify function from the util module
 const cookieparser = require('cookie-parser'); // Import the cookie-parser middleware for parsing cookies
 const { renderHomePage, renderRegisterPage, handleRegister, renderLoginPage, handleLoginPage } = require('./controllers/authController');
+const session=require('express-session')
+const flash=require('connect-flash')
+app.use(session({
+    secret :"thisissecretforsession",
+    resave :false,
+    saveUninitialized :false,
+
+}))
+app.use(flash())
 
 const authRoute=require('./routes/authRoute'); // Import the authentication routes
 const questionRoute=require('./routes/questionRoute'); // Import the question routes
 const answerRoute=require('./routes/answerRoute'); // Import the answer routes
+const catchError = require('./utils/catchError');
 app.set('view engine','ejs'); // Set the view engine to EJS
 
 
@@ -46,11 +56,7 @@ catch(err){
 next()
 
 })
-app.get('/', renderHomePage);
-
-
- 
-
+app.get('/', catchError(renderHomePage));
 
 app.use("/", authRoute); // Use the authentication routes
 app.use("/", questionRoute); // Use the question routesapp.use("/", answerRoute); // Use the answer routes

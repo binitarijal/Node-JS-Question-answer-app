@@ -11,7 +11,8 @@ const { where } = require('sequelize');
 
 
 exports.renderHomePage = async(req, res) => {
-const data= await questions.findAll({
+
+    const data= await questions.findAll({
     include:[{
     model: users, // Include the users model to get user details for each question
     attributes: ['username'] // Specify the attributes you want to retrieve from the users model
@@ -19,9 +20,12 @@ const data= await questions.findAll({
 })
 //console.log(data); // Log the retrieved questions data to the console
     res.render('home', { data: data }); // Render the 'home' view
-};
+
+}
+
 
 exports.renderRegisterPage = (req,res)=>{
+    
     res.render('auth/register'); // Render the 'register' view
 }
 
@@ -38,7 +42,7 @@ exports.handleRegister = async(req,res)=>{
         }
     })
     if(data.length > 0){ // If a user with the provided email already exists
-        return res.status(400).send("User already exists!"); // Send a 400 status with an error message
+    return res.status(400).send("user already exists with that email")
     }
     await users.create({
         username,
@@ -49,7 +53,10 @@ exports.handleRegister = async(req,res)=>{
 }
 
 exports.renderLoginPage = (req,res)=>{
-    res.render('auth/login'); // Render the 'login' view
+   const [error]= req.flash('error')
+   console.log(error)
+   
+    res.render('auth/login',{error}); // Render the 'login' view
 }
 
 exports.handleLoginPage = async(req,res)=>{
@@ -77,12 +84,14 @@ if(!email || !password){ // Check if any of the fields are empty
    
    }
    else{
-     res.send("Invalid password/email"); // If the password does not match, send an error message
+    req.flash('error','Invalid password')
+    res.redirect("/login")
    }
   }
   else{
-    res.send("User not found");
-  }
+req.flash('error'," No user with that email")
+res.redirect("/login")
+}
  // console.log(data); // Log the retrieved user data to the console
 
   // You may want to add password verification and response here
